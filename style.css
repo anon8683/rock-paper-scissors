@@ -1,3 +1,64 @@
-h1 {
-    color: red;
+@import url("https://fonts.googleapis.com/css2?family=Koulen&display=swap");
+
+body {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: "Koulen", sans-serif;
+  background-color: beige;
+  font-size: 2rem;
+  text-shadow: 1px 1.5px #888888;
+}
+
+button {
+  background-color: bisque;
+  border-radius: 5px;
+  padding: 3px;
+  margin-bottom: 10px;
+  width: 10em;
+  font-family: "Koulen";
+  box-shadow: 5px 4px #888888;
+}
+
+button:hover {
+  background-color: aquamarine;
+  transform: scale(1.13);
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  gap: 30px;
+}
+
+h3 {
+  margin: 1px;
+  text-align: center;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.playerScore {
+  margin-bottom: 0px;
+}
+
+.winner {
+  color: goldenrod;
+}
+
+h2 {
+  margin: 0.5em;
+  color: ;
+}
+
+.playerScore {
+  color: rgb(30, 131, 30);
+  font-size: 1.5em;
+}
+.compScore {
+  color: rgb(207, 79, 79);
+  font-size: 1.5em;
 }

@@ -1,89 +1,100 @@
-compScore = 0;
-playerScore = 0;
-userName = getName();
+let compScore = 0;
+let playerScore = 0;
+let playerChoice = "";
+// userName = getName();
 
-// Asks the user for their name and stores it in userName
-function getName() {
-  let name = prompt(
-    "Welcome to Rock, Paper, Scissors. Please enter your name:"
-  );
-  return name;
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const newGame = document.querySelector("#restart");
+const body = document.querySelector("body");
+const header3p = document.querySelector(".playerChose");
+const header3 = document.querySelector(".compChose");
+const winner = document.querySelector(".winner");
+
+const playerScores = document.createElement("div");
+const computerScore = document.createElement("div");
+
+computerScore.classList.add("compScore");
+playerScores.classList.add("playerScore");
+body.appendChild(playerScores);
+body.appendChild(computerScore);
+
+computerScore.textContent = `Computer score: ${compScore}`;
+playerScores.textContent = `Player score: ${playerScore}`;
+
+newGame.addEventListener("click", startGame);
+
+rock.addEventListener("click", function (e) {
+  playerChoice = "Rock";
+  playRound(computerPlay(), playerChoice);
+  header3p.textContent = `You chose...${playerChoice}`;
+});
+paper.addEventListener("click", function (e) {
+  playerChoice = "Paper";
+  playRound(computerPlay(), playerChoice);
+  header3p.textContent = `You chose...${playerChoice}`;
+});
+scissors.addEventListener("click", function (e) {
+  playerChoice = "Scissors";
+  playRound(computerPlay(), playerChoice);
+  header3p.textContent = `You chose...${playerChoice}`;
+});
+
+if (compScore === 5 && playerScore < 5) {
+  computerScore.textContent = `Computer score: ${compScore} Computer wins that round >:()`;
+} else if (playerScore === 5 && compScore < 5) {
+  playerScores.textContent = `Player score: ${playerScore}  You win that round!`;
 }
 
-// Makes a list of 3 choices and picks 1 at random.
+// Reloads the page to start a new game
+function startGame() {
+  location.reload();
+}
+
 function computerPlay() {
   choices = ["Rock", "Paper", "Scissors"];
   randomChoice = choices[Math.floor(Math.random() * choices.length)];
+  header3.textContent = `Computer chose...${randomChoice}`;
   return randomChoice;
 }
 
-// Asks user for their choice, converts string to lower case then first char of that string to uppercase.
-function playerSelection() {
-  userInput = prompt("Rock paper or scissors?");
-  userInput = userInput.toLowerCase();
-  return userInput.charAt(0).toUpperCase() + userInput.slice(1);
-}
 // Function to determine the winner based on choices.
 // Compares choices to find a winner and increases score counter based on winner and returns a string of the winner
+
 function playRound(comp, player) {
   if (comp === player) {
+    winner.textContent = "It's a tie!";
     return "It's a tie!";
   } else if (comp === "Rock" && player === "Paper") {
     ++playerScore;
-    return `${userName} wins! Paper beats rock.`;
+    playerScores.textContent = `Player score: ${playerScore}`;
+    winner.textContent = "You win that round!";
+    return "player";
   } else if (comp === "Rock" && player === "Scissors") {
     ++compScore;
-    return "Computer wins! Rock beats scissors.";
+    computerScore.textContent = `Computer score: ${compScore}`;
+    winner.textContent = "Computer wins that round >:(";
+    return "computer";
   } else if (comp === "Paper" && player === "Rock") {
     ++compScore;
-    return "Computer wins! Paper beats Rock.";
+    computerScore.textContent = `Computer score: ${compScore}`;
+    winner.textContent = "Computer wins that round >:(";
+    return "computer";
   } else if (comp === "Paper" && player === "Scissors") {
     ++playerScore;
-    return `${userName} wins! Scissors beats Paper.`;
+    playerScores.textContent = `Player score: ${playerScore}`;
+    winner.textContent = "You win that round!";
+    return "player";
   } else if (comp === "Scissors" && player === "Rock") {
     ++playerScore;
-    return `${userName} wins! Rock beats Scissors.`;
+    playerScores.textContent = `Player score: ${playerScore}`;
+    winner.textContent = "You win that round!";
+    return "player";
   } else if (comp === "Scissors" && player === "Paper") {
     ++compScore;
-    return "Computer wins! Scissors beats Paper.";
+    computerScore.textContent = `Computer score: ${compScore}`;
+    winner.textContent = "Computer wins that round >:(";
+    return "computer";
   }
 }
-
-function game() {
-  // Calls the playRound() function 5 times
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound(computerPlay(), playerSelection()));
-  }
-  // Prints final score from counters
-  console.log(
-    `Final scores are: \n Computer: ${compScore}\n ${userName}: ${playerScore}`
-  );
-
-  // If else statements to determine who was the overall winner based on counter score.
-  if (compScore === playerScore) {
-    console.log("You both had the same score, it was a tie!");
-  } else if (compScore > playerScore) {
-    console.log("Computer wins the game.");
-  } else {
-    console.log(`${userName} wins the game.`);
-  }
-}
-
-game();
-
-const Fruits = [
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-  "list",
-];
