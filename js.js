@@ -1,98 +1,125 @@
+const btn = document.querySelectorAll("button");
+const youChose = document.querySelector(".player-choice");
+const compChose = document.querySelector(".computer-choice");
+const pScore = document.querySelector(".player-score");
+const cScore = document.querySelector(".computer-score");
+const winner = document.querySelector(".round-winner");
+const gameWinner = document.querySelector(".game-winner");
+const new_game = document.querySelector("#new-game");
+
+let playerChoice = "";
 let compScore = 0;
 let playerScore = 0;
-let playerChoice = "";
-// userName = getName();
 
-const rock = document.querySelector("#rock");
-const paper = document.querySelector("#paper");
-const scissors = document.querySelector("#scissors");
-const newGame = document.querySelector("#restart");
-const body = document.querySelector("body");
-const header3p = document.querySelector(".playerChose");
-const header3 = document.querySelector(".compChose");
-const winner = document.querySelector(".winner");
-const playerScores = document.createElement("div");
-const computerScore = document.createElement("div");
+// Adds a listener to each button
+// If the button new-game is click, call newGame to reset.
+// Else the button id clicked is == to playerchoice
+// Playround is called
+btn.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    if (btn.id === "new-game") {
+      newGame();
+      return;
+    }
+    youChose.textContent = `You chose: ${playerChoice}`;
+    playerChoice = btn.id;
+    playerChoice = playerChoice.toUpperCase().charAt(0) + playerChoice.slice(1);
 
-computerScore.classList.add("compScore");
-playerScores.classList.add("playerScore");
-body.appendChild(playerScores);
-body.appendChild(computerScore);
+    youChose.textContent = `You chose: ${playerChoice}`;
+    playRound(playerChoice);
+  })
+);
 
-computerScore.textContent = `Computer score: ${compScore}`;
-playerScores.textContent = `Player score: ${playerScore}`;
+// Calls checkWinner to determine winner of round
+// Displays scores
+// Checks if sccores are above 4, if they are, input buttons will be disabled
+function playRound(playerChoice) {
+  checkWinner(playerChoice);
+  pScore.textContent = `Player score: ${playerScore}`;
+  cScore.textContent = `Computer score: ${compScore}`;
 
-// When newGame button is clicked, page reloads
-newGame.addEventListener("click", startGame);
+  if (playerScore > 4) {
+    gameWinner.textContent = "You won! Nice job.";
+    new_game.classList.add("visible");
 
-// Adds event listners to each button
-// Could add forEach and use this.id to return choice
+    disableButtons();
+    //make new game visible
+  }
+  if (compScore > 4) {
+    gameWinner.textContent = "Computer won, better luck next time.";
+    new_game.classList.add("visible");
 
-rock.addEventListener("click", function (e) {
-  playerChoice = "Rock";
-  playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose: ${playerChoice}`;
-});
-paper.addEventListener("click", function (e) {
-  playerChoice = "Paper";
-  playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose: ${playerChoice}`;
-});
-scissors.addEventListener("click", function (e) {
-  playerChoice = "Scissors";
-  playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose: ${playerChoice}`;
-});
-
-// Reloads the page to start a new game
-function startGame() {
-  location.reload();
+    disableButtons();
+    //make new game visible
+  }
 }
 
-// Computer choose a random selection from choices[]
-function computerPlay() {
+// Resets the game to defaults
+function newGame() {
+  playerScore = 0;
+  compScore = 0;
+  pScore.textContent = `Player score: ${playerScore}`;
+  cScore.textContent = `Computer score: ${compScore}`;
+  youChose.textContent = "";
+  compChose.textContent = "";
+  winner.textContent = "";
+  gameWinner.textContent = "";
+  new_game.classList.remove("visible");
+
+  enableButtons();
+}
+
+// Disables buttons
+function disableButtons() {
+  document.querySelector("#rock").disabled = true;
+  document.querySelector("#paper").disabled = true;
+  document.querySelector("#scissors").disabled = true;
+}
+// Enables buttons
+function enableButtons() {
+  document.querySelector("#rock").disabled = false;
+  document.querySelector("#paper").disabled = false;
+  document.querySelector("#scissors").disabled = false;
+}
+
+//Logic function to determine winner
+function checkWinner(player) {
+  let computerChoice = computerSelection();
+  compChose.textContent = `Computer chose: ${computerChoice}`;
+
+  if (computerChoice === player) {
+    winner.textContent = "It's a tie!";
+    return "tie";
+  } else if (computerChoice === "Rock" && player === "Paper") {
+    playerScore++;
+    winner.textContent = "You win that round!";
+    return 1;
+  } else if (computerChoice === "Rock" && player === "Scissors") {
+    compScore++;
+    winner.textContent = "Computer wins that round >:(";
+    return 2;
+  } else if (computerChoice === "Paper" && player === "Rock") {
+    compScore++;
+    winner.textContent = "Computer wins that round >:(";
+    return 2;
+  } else if (computerChoice === "Paper" && player === "Scissors") {
+    playerScore++;
+    winner.textContent = "You win that round!";
+    return 1;
+  } else if (computerChoice === "Scissors" && player === "Rock") {
+    playerScore++;
+    winner.textContent = "You win that round!";
+    return 1;
+  } else if (computerChoice === "Scissors" && player === "Paper") {
+    compScore++;
+    winner.textContent = "Computer wins that round >:(";
+    return 2;
+  }
+}
+
+// Computer chooses randomly from choices[]
+function computerSelection() {
   choices = ["Rock", "Paper", "Scissors"];
   randomChoice = choices[Math.floor(Math.random() * choices.length)];
-  header3.textContent = `Computer chose: ${randomChoice}`;
   return randomChoice;
-}
-
-// Function to determine the winner based on choices.
-// Compares choices to find a winner and increases score counter based on winner and returns a string of the winner
-
-function playRound(comp, player) {
-  if (comp === player) {
-    winner.textContent = "It's a tie!";
-    return "It's a tie!";
-  } else if (comp === "Rock" && player === "Paper") {
-    ++playerScore;
-    playerScores.textContent = `Player score: ${playerScore}`;
-    winner.textContent = "You win that round!";
-    return "player";
-  } else if (comp === "Rock" && player === "Scissors") {
-    ++compScore;
-    computerScore.textContent = `Computer score: ${compScore}`;
-    winner.textContent = "Computer wins that round >:(";
-    return "computer";
-  } else if (comp === "Paper" && player === "Rock") {
-    ++compScore;
-    computerScore.textContent = `Computer score: ${compScore}`;
-    winner.textContent = "Computer wins that round >:(";
-    return "computer";
-  } else if (comp === "Paper" && player === "Scissors") {
-    ++playerScore;
-    playerScores.textContent = `Player score: ${playerScore}`;
-    winner.textContent = "You win that round!";
-    return "player";
-  } else if (comp === "Scissors" && player === "Rock") {
-    ++playerScore;
-    playerScores.textContent = `Player score: ${playerScore}`;
-    winner.textContent = "You win that round!";
-    return "player";
-  } else if (comp === "Scissors" && player === "Paper") {
-    ++compScore;
-    computerScore.textContent = `Computer score: ${compScore}`;
-    winner.textContent = "Computer wins that round >:(";
-    return "computer";
-  }
 }

@@ -4,10 +4,22 @@ body {
   box-sizing: border-box;
   text-align: center;
   font-family: "Koulen", sans-serif;
-  background-color: rgb(179, 179, 170);
+  background: linear-gradient(#706e6e, #636364);
   font-size: 2rem;
   text-shadow: 1px 1.5px #888888;
-  height: 98vh;
+  height: 100vh;
+}
+
+* {
+  margin: 0;
+}
+
+#new-game.visible {
+  display: inline;
+}
+
+#new-game {
+  display: none;
 }
 
 button {
@@ -17,7 +29,8 @@ button {
   margin-bottom: 10px;
   width: 10em;
   font-family: "Koulen";
-  box-shadow: 5px 4px #888888;
+  box-shadow: 5px 4px #525151;
+  margin-left: 1rem;
 }
 
 button:hover {
@@ -26,13 +39,17 @@ button:hover {
   cursor: pointer;
 }
 
-.button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
-  gap: 30px;
+button:active {
+  transform: translateY(1px);
+}
+
+.player-score {
+  color: rgb(23, 102, 23);
+  font-size: 1.5em;
+}
+.computer-score {
+  color: rgb(116, 49, 49);
+  font-size: 1.5em;
 }
 
 h3 {
@@ -40,21 +57,4 @@ h3 {
   text-align: center;
   font-size: 0.8em;
   letter-spacing: 0.05em;
-}
-
-.playerScore {
-  margin-bottom: 0px;
-}
-
-h2 {
-  margin: 0em;
-}
-
-.playerScore {
-  color: rgb(30, 131, 30);
-  font-size: 1.5em;
-}
-.compScore {
-  color: rgb(207, 79, 79);
-  font-size: 1.5em;
 }
