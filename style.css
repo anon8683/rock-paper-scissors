@@ -4,9 +4,10 @@ body {
   box-sizing: border-box;
   text-align: center;
   font-family: "Koulen", sans-serif;
-  background-color: beige;
+  background-color: rgb(179, 179, 170);
   font-size: 2rem;
   text-shadow: 1px 1.5px #888888;
+  height: 98vh;
 }
 
 button {
@@ -45,13 +46,8 @@ h3 {
   margin-bottom: 0px;
 }
 
-.winner {
-  color: goldenrod;
-}
-
 h2 {
-  margin: 0.5em;
-  color: ;
+  margin: 0em;
 }
 
 .playerScore {

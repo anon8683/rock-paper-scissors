@@ -28,17 +28,17 @@ newGame.addEventListener("click", startGame);
 rock.addEventListener("click", function (e) {
   playerChoice = "Rock";
   playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose...${playerChoice}`;
+  header3p.textContent = `You chose: ${playerChoice}`;
 });
 paper.addEventListener("click", function (e) {
   playerChoice = "Paper";
   playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose...${playerChoice}`;
+  header3p.textContent = `You chose: ${playerChoice}`;
 });
 scissors.addEventListener("click", function (e) {
   playerChoice = "Scissors";
   playRound(computerPlay(), playerChoice);
-  header3p.textContent = `You chose...${playerChoice}`;
+  header3p.textContent = `You chose: ${playerChoice}`;
 });
 
 if (compScore === 5 && playerScore < 5) {
@@ -55,7 +55,7 @@ function startGame() {
 function computerPlay() {
   choices = ["Rock", "Paper", "Scissors"];
   randomChoice = choices[Math.floor(Math.random() * choices.length)];
-  header3.textContent = `Computer chose...${randomChoice}`;
+  header3.textContent = `Computer chose: ${randomChoice}`;
   return randomChoice;
 }
 
