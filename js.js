@@ -23,8 +23,11 @@ body.appendChild(computerScore);
 computerScore.textContent = `Computer score: ${compScore}`;
 playerScores.textContent = `Player score: ${playerScore}`;
 
+// When newGame button is clicked, page reloads
 newGame.addEventListener("click", startGame);
 
+// Adds event listners to each button
+// Could add forEach and use this.id to return choice
 rock.addEventListener("click", function (e) {
   playerChoice = "Rock";
   playRound(computerPlay(), playerChoice);
@@ -40,12 +43,6 @@ scissors.addEventListener("click", function (e) {
   playRound(computerPlay(), playerChoice);
   header3p.textContent = `You chose: ${playerChoice}`;
 });
-
-if (compScore === 5 && playerScore < 5) {
-  computerScore.textContent = `Computer score: ${compScore} Computer wins that round >:()`;
-} else if (playerScore === 5 && compScore < 5) {
-  playerScores.textContent = `Player score: ${playerScore}  You win that round!`;
-}
 
 // Reloads the page to start a new game
 function startGame() {
