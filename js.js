@@ -11,7 +11,6 @@ const body = document.querySelector("body");
 const header3p = document.querySelector(".playerChose");
 const header3 = document.querySelector(".compChose");
 const winner = document.querySelector(".winner");
-
 const playerScores = document.createElement("div");
 const computerScore = document.createElement("div");
 
@@ -28,6 +27,7 @@ newGame.addEventListener("click", startGame);
 
 // Adds event listners to each button
 // Could add forEach and use this.id to return choice
+
 rock.addEventListener("click", function (e) {
   playerChoice = "Rock";
   playRound(computerPlay(), playerChoice);
@@ -49,6 +49,7 @@ function startGame() {
   location.reload();
 }
 
+// Computer choose a random selection from choices[]
 function computerPlay() {
   choices = ["Rock", "Paper", "Scissors"];
   randomChoice = choices[Math.floor(Math.random() * choices.length)];
