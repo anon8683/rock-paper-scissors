@@ -21,7 +21,7 @@ btn.forEach((btn) =>
       newGame();
       return;
     }
-    youChose.textContent = `You chose: ${playerChoice}`;
+
     playerChoice = btn.id;
     playerChoice = playerChoice.toUpperCase().charAt(0) + playerChoice.slice(1);
 
@@ -85,6 +85,7 @@ function enableButtons() {
 //Logic function to determine winner
 function checkWinner(player) {
   let computerChoice = computerSelection();
+
   compChose.textContent = `Computer chose: ${computerChoice}`;
 
   if (computerChoice === player) {
@@ -92,27 +93,27 @@ function checkWinner(player) {
     return "tie";
   } else if (computerChoice === "Rock" && player === "Paper") {
     playerScore++;
-    winner.textContent = "You win that round!";
+    winner.textContent = "You win that round! 😎";
     return 1;
   } else if (computerChoice === "Rock" && player === "Scissors") {
     compScore++;
-    winner.textContent = "Computer wins that round >:(";
+    winner.textContent = "Computer wins that round 😡";
     return 2;
   } else if (computerChoice === "Paper" && player === "Rock") {
     compScore++;
-    winner.textContent = "Computer wins that round >:(";
+    winner.textContent = "Computer wins that round 😡";
     return 2;
   } else if (computerChoice === "Paper" && player === "Scissors") {
     playerScore++;
-    winner.textContent = "You win that round!";
+    winner.textContent = "You win that round! 😎";
     return 1;
   } else if (computerChoice === "Scissors" && player === "Rock") {
     playerScore++;
-    winner.textContent = "You win that round!";
+    winner.textContent = "You win that round! 😎";
     return 1;
   } else if (computerChoice === "Scissors" && player === "Paper") {
     compScore++;
-    winner.textContent = "Computer wins that round >:(";
+    winner.textContent = "Computer wins that round 😡";
     return 2;
   }
 }
